@@ -4,7 +4,6 @@ require_once '../model/db_config.php';
 
 $name = "";
 $err_name = "";
-
 $credit = "";
 $err_credit = "";
 
@@ -13,9 +12,14 @@ $err_cgpa = "";
 
 $dob = "";
 $err_dob ="";
+$err_db="";
+
+
+$hasError = false;
 
 $department = getAllDEpartments();
 $err_department ="";
+
 if(isset($_POST["add_student"])){
 
     if(empty($_POST["name"])){
@@ -44,24 +48,26 @@ if(isset($_POST["add_student"])){
 
 
     if(!$hasError){
-        if(authenticateUser($cid,$password)){
-            header("Location: dashboard.php");
-        }
-        $db_err = "Username password invalid";
-
-
-        $rs = insertStudent($_POST["name"],$_POST["credit"],$_POST["cgpa"],$_POST["dob"],$_POST["department"]);
+        $rs = insertStudent($_POST["name"],$_POST["credit"],$_POST["cgpa"],$_POST["dob"],$_POST["dpt_id"]);
 		if ($rs === true){
-			header("Location: allproducts.php");
+			header("Location: allStudents.php");
 		}
 		$err_db = $rs;
 
     }
 
 }
+elseif(isset($_POST["edit_student"])){
+
+        $rs = editStudent($_POST['id'],$name,$dob,$credit,$cgpa,$_POST["dpt_id"]);
+		if($rs === true){
+			header("Location: allStudents.php");
+		}
+		$err_db = $rs;
+}
 
 function insertStudent($name,$credit,$cgpa,$dob,$department){
-    $query = "insert into products values (NULL,'$name',$credit,$cgpa,$dob,$department)";
+    $query = "insert into students values (NULL,'$name','$dob',$credit,$cgpa,$department)";
     return execute($query);
 }
 
@@ -70,6 +76,24 @@ function getAllDEpartments(){
     $query = "select * from departments";
 	$rs = get($query);
 	return $rs;
+}
+
+function getStudent($id){
+    $query = "select * from students where id=$id";
+    $rs=get($query);
+    return $rs[0];
+}
+
+function getAllStudents(){
+    $query ="select s.*,d.d_name from students s left join departments d on s.d_id = d.id";
+    $rs = get($query);
+    return $rs;
+}
+
+function editStudent($id,$name,$dob,$credit,$cgpa,$dpt){
+    $query = "update students set name=$name dob=$dob credit=$credit cgpa=$cgpa d_id=$dpt where id=$id";
+    return execute($query);
+    
 }
 
 
