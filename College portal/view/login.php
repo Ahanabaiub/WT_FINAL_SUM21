@@ -1,5 +1,5 @@
 <?php
-    require_once "../controller/userController.php";
+    include_once "../controllers/userController.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
                         <td><span><?php echo $db_err; ?></span></td>
                     </tr>
                     <tr>
-                        <td><b>User Name :</b></td>
+                        <td><b>User ID :</b></td>
                         <td><input type="text" name="cid" value="<?php echo $cid; ?>"></td>
                         <td><span> <?php echo $err_cid; ?></span></td>
                     </tr>
@@ -29,7 +29,7 @@
                         <td><span> <?php echo $err_password; ?></span></td>
                     </tr>    
                     <tr>
-					    <td colspan="2" align="right"><input type="submit" name="submit" value="Submit"></td>
+					    <td colspan="2" align="right"><input type="submit" name="login_btn" value="Submit"></td>
 				    </tr>
         </fieldset>
 

@@ -1,0 +1,84 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.header{
+    padding: 20px 15px; 
+    background-color: cadetblue;
+    color: white;
+}
+.header #dashName{
+     font-size: 23px;
+     font-weight: 15px;
+ }
+
+.header .header-link{
+    margin-left: 580px;
+    font-size: 19px;
+}
+
+.header-link a{
+    padding: 5px;
+    text-decoration: none;
+    color: rgb(235, 231, 231);
+}
+
+.main-menu{
+    padding-left: 320px;
+    padding: 10px;
+    padding-left: 15px;
+    
+    
+}
+.main-menu a{
+    padding-right: 15px;
+    color: rgb(39, 38, 38);
+}
+
+.main-container{
+    background: rgb(241, 241, 241);
+    height: 100vh;
+}
+
+.home .home-info{
+    display: inline-block;
+    background: seagreen;
+    color: seashell;
+    width: 150px;
+    height: 60px;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.home h2{
+    padding-left: 370px;
+    margin-bottom: 8px;
+    color: teal;
+}
+
+.students-section{
+    padding-left: 10px;
+    background-color: burlywood;
+}
+
+.create-btn{
+    padding-top: 8px;
+}
+
+.create-btn a{
+    background: teal;
+    padding:8px 15px;
+    border-radius: 5px;
+    color: rgb(235, 231, 231);
+    font-size: 20px;
+}
