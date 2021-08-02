@@ -2,7 +2,7 @@
     require_once "./checkAuthorization.php";
 
     $userName=$_SESSION["loggedUser"];
-    $dashName="Admin Dashboard";
+    $dashName=$_SESSION["dashName"];
 ?>
 
 <div class="header">

@@ -4,6 +4,7 @@
 
     require_once "../controllers/studentController.php";
     $totalStudent = countStudents();
+    $totalTeacher = countTeachers();
 
 ?>
 <!DOCTYPE html>
@@ -22,7 +23,7 @@
                 <p>Total Students</p>
             </div>
             <div class="home-info">
-                <p>50</p>
+            <p><?php echo $totalTeacher["total"] ?></p>
                 <p>Total Faculty</p>
             </div>
             <div class="home-info">

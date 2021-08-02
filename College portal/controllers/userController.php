@@ -42,6 +42,7 @@
                if($rs){
                    // echo getAdminName($cid);
                    $_SESSION["loggedUser"] = getAdminName($cid);
+                   $_SESSION["dashName"]="Admin DashBoard";
                    header("Location: adminDash.php");
                }
                else{
@@ -51,6 +52,20 @@
             }
             else if($cid>=3000 && $cid<4000){
                 //teacher
+
+                
+               $rs= authenticateTeacher($cid,$password);
+
+               if($rs){
+                   $_SESSION["loggedUser"] = getTeacherName($cid);
+                   $_SESSION["dashName"]="Teacher DashBoard";
+                   $_SESSION["loggedUserId"]=getTeacherId($cid);
+                   header("Location: teacherDash.php");
+               }
+               else{
+                $db_err ="Invalid userId Password.";
+               }
+
             }
 
         }
@@ -75,6 +90,31 @@
         $nm = $rs[0];
         return $nm["name"];
 
+    }
+
+    function authenticateTeacher($cid,$password){
+        $query = "select * from teachers where cid='$cid' and password='$password'";
+		$rs = get($query);
+		if(count($rs)>0){
+			return true;
+		}
+		return false;
+
+    }
+
+    function getTeacherName($cid){
+        $query = "select * from teachers where cid = $cid";
+        $rs = get($query);
+        $nm = $rs[0];
+        return $nm["name"];
+
+    }
+
+    function getTeacherId($cid){
+        $query = "select * from teachers where cid = $cid";
+        $rs = get($query);
+        $nm = $rs[0];
+        return $nm["id"];
     }
 
 ?>

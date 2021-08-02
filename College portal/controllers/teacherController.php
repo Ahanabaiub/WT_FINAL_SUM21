@@ -8,17 +8,8 @@
      $name = "";
      $err_name="";
 
-     $dob = "";
-     $err_dob ="";
-
      $address = "";
      $err_address = "";
-
-     $year = "";
-     $err_year = "";
-
-     $blood = "";
-     $err_blood  ="";
 
      $password = "";
      $err_password  ="";
@@ -35,7 +26,7 @@
 
      $hasError = false;
 
-     if(isset($_POST["add_student"])){
+     if(isset($_POST["add_teacher"])){
 
           if(empty($_POST["cid"])){
                $hasError = true;
@@ -53,30 +44,7 @@
               $name = $_POST["name"];
           }
       
-          if(empty($_POST["dob"])){
-              $hasError = true;
-              $err_dob  ="Date of Birth Required.";
-          }
-          else{
-              $dob = $_POST["dob"];
-          }
-      
-          if(empty($_POST["year"])){
-              $hasError = true;
-              $err_year  ="year Required.";
-          }
-          else{
-              $year = $_POST["year"];
-          }
-
-          if(empty($_POST["blood"])){
-               $hasError = true;
-               $err_blood  ="blood Required.";
-          }
-          else{
-               $blood = $_POST["blood"];
-          }
-
+         
           if(empty($_POST["address"])){
                $hasError = true;
                $err_address  ="address Required.";
@@ -103,16 +71,16 @@
       
       
           if(!$hasError){
-              $rs = insertStudent($cid,$name,$department,$address,$dob,$year,$blood,$password);
+              $rs = insertTeacher($cid,$name,$department,$address,$password);
                 if ($rs === true){
-                     header("Location: ./allStudents.php");
+                     header("Location: ./allTeachers.php");
                 }
                 $err_db = $rs;
       
           }
       
       }
-      elseif (isset($_POST["edit_student"])) {
+      elseif (isset($_POST["edit_teacher"])) {
            $id = $_POST["id"];
           if(empty($_POST["cid"])){
                $hasError = true;
@@ -130,29 +98,6 @@
               $name = $_POST["name"];
           }
       
-          if(empty($_POST["dob"])){
-              $hasError = true;
-              $err_dob  ="Date of Birth Required.";
-          }
-          else{
-              $dob = $_POST["dob"];
-          }
-      
-          if(empty($_POST["year"])){
-              $hasError = true;
-              $err_year  ="year Required.";
-          }
-          else{
-              $year = $_POST["year"];
-          }
-
-          if(empty($_POST["blood"])){
-               $hasError = true;
-               $err_blood  ="blood Required.";
-          }
-          else{
-               $blood = $_POST["blood"];
-          }
 
           if(empty($_POST["address"])){
                $hasError = true;
@@ -172,9 +117,9 @@
           }
 
           if(!$hasError){
-               $rs = editStudent($id,$cid,$name,$department,$address,$dob,$year,$blood);
+               $rs = editTeacher($id,$cid,$name,$department,$address);
                  if ($rs === true){
-                      header("Location: ./allStudents.php");
+                      header("Location: ./allTeachers.php");
                  }
                  $err_db = $rs;
        
@@ -183,10 +128,10 @@
       }
       elseif(isset($_GET["del"])){
 
-          $rs= deleteStudent($_GET['del']);
+          $rs= deleteTeacher($_GET['del']);
 
           if($rs === true){
-               header("Location: ./allStudents.php");
+               header("Location: ./allTeachers.php");
           }
           $err_db = $rs;
       }
@@ -207,19 +152,19 @@
     
 
 
-     function getAllStudents(){
-          $query ="select s.*,d.d_name from students s left join departments d on s.department_id = d.id";
+     function getAllTeachers(){
+          $query ="select t.*,d.d_name from teachers t left join departments d on t.department_id = d.id";
           $rs = get($query);
           return $rs;
      }
 
-     function insertStudent($cid,$name,$department,$address,$dob,$year,$blood,$password){
-          $query ="INSERT INTO students VALUES (NULL,$cid,'$name',$department,'$address','$dob',$year,'$blood','$password',NULL)";
+     function insertTeacher($cid,$name,$department,$address,$password){
+          $query ="INSERT INTO teachers VALUES (NULL,$cid,'$name',$department,'$password','$address',NULL)";
           return execute($query);
      }
 
-     function getStudent($id){
-          $query ="SELECT * FROM students where id = $id";
+     function getTeacher($id){
+          $query ="SELECT * FROM teachers where id = $id";
           $rs = get($query);
           return $rs[0];
      }
@@ -230,30 +175,18 @@
           return $rs;
      }
 
-     function editStudent($id,$cid,$name,$department,$address,$dob,$year,$blood){
-          $query = "update students set cid=$cid,name='$name',department_id=$department,address='$address',dob='$dob',year=$year,blood='$blood' where id=$id";
+     function editTeacher($id,$cid,$name,$department,$address){
+          $query = "update teachers set cid=$cid,name='$name',department_id=$department,address='$address' where id=$id";
           return execute($query);
           
      }
 
-     function deleteStudent($id){
+     function deleteTeacher($id){
 
-          $query = "delete from students where id=$id";
+          $query = "delete from teachers where id=$id";
           return execute($query);
 
      }
-
-     function countStudents(){
-          $query = "select COUNT(*) as total from students";
-          $rs = get($query);
-          return $rs[0];
-     }
-     function countTeachers(){
-          $query = "select COUNT(*) as total from teachers";
-          $rs = get($query);
-          return $rs[0];
-     }
-
 
      function generateReport($year,$month){
 
@@ -264,9 +197,14 @@
 
      }
 
-     function getAllStudentsBySectionId($section_id){
-          $query = "select * from students where section_id=$section_id";
+     function getAllAssignedSection($id){
+
+          $query = "SELECT ct.*, s.name section_name,c.name course_name from course_teacher ct 
+          left join sections s on ct.section_id = s.id
+          left join courses c on ct.course_id =c.id 
+           where teacher_id =$id";
           $rs = get($query);
           return $rs;
+
      }
 ?>

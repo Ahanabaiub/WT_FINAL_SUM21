@@ -7,6 +7,7 @@
     <title>Login</title>
 </head>
 <body>
+    <span></span>
     <form action="" method="POST">
         <fieldset>
                 <table>

@@ -68,11 +68,12 @@ ul{
 
 .students-section{
     padding-left: 10px;
-    background-color: burlywood;
+    margin-top: 20px;
 }
 
 .create-btn{
     padding-top: 8px;
+    margin-left: 20px;
 }
 
 .create-btn a{
@@ -82,3 +83,4 @@ ul{
     color: rgb(235, 231, 231);
     font-size: 20px;
 }
+
