@@ -50,7 +50,7 @@
                                     echo "<td>$i</td>";
                                     echo "<td>".$c["section_name"]."</td>";
                                     echo "<td>".$c["course_name"]."</td>";
-                                    echo '<td><a href="./sectionDetails.php?id='.$c['id'].'&sec='.$c['section_name'].'&sub='.$c["course_name"].'">Details</a></td>';
+                                    echo '<td><a href="./sectionDetails.php?id='.$c['section_id'].'&sec='.$c['section_name'].'&sub='.$c["course_name"].'">Details</a></td>';
                                 echo "</tr>";
                                 $i++;
                             }

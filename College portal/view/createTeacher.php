@@ -24,8 +24,8 @@
                      <tr><?php echo $err_db?></tr>
                      <tr>
                         <td><b>College Id :</b></td>
-                        <td><input type="text" name="cid" value="<?php echo $cid; ?>"></td>
-                        <td><span> <?php echo $err_cid; ?></span></td>
+                        <td><input type="text" id="cid" onfocusout="checkIdExistance(this.value)" name="cid" value="<?php echo $cid; ?>"></td>
+                        <td><span id="erId"> <?php echo $err_cid; ?></span></td>
                     </tr>
                     <tr>
                         <td><b>Name :</b></td>
@@ -68,6 +68,23 @@
             </div>
         </div> 
     </div>
+    <script>
+        function checkIdExistance(tid){
+            if(tid.length==0){
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET","utils/teacherIdCheck.php?id="+tid,true);
+            xhr.onreadystatechange=function(){
+                if(this.readyState == 4 && this.status == 200){
+                    document.getElementById("erId").innerHTML = this.responseText;
+                }
+            };
+            xhr.send();
+            
+        }
+    </script>
     
 </body>
 </html>

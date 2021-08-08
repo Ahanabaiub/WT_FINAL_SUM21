@@ -47,6 +47,7 @@ ul{
 .main-container{
     background: rgb(241, 241, 241);
     height: 100vh;
+    width: 100%;
 }
 
 .home .home-info{
@@ -84,3 +85,7 @@ ul{
     font-size: 20px;
 }
 
+.section-form{
+    display: inline-block;
+    margin-left:15px;
+}

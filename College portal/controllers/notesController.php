@@ -18,9 +18,15 @@ $course_id = getCourseIdbyName($_GET['sub']);
                 $err_note="Choose pdf file only.";
             }
             else{
-                $target="./uploads/".$_FILES['n_name']['name'];
+                $target="./uploads/".$_GET["sub"]."_".$_GET["sec"];
+                if(!is_dir($target)){
+                    mkdir($target);
+                }
+                $fileName = str_replace(" ","_",$_FILES['n_name']['name']);
+                $target=$target."/".$fileName;
+                //$target="./uploads/".$_FILES['n_name']['name'];
                 move_uploaded_file($_FILES["n_name"]["tmp_name"],$target);
-                $rs = saveNote($_GET["id"],$course_id,$_FILES["n_name"]["name"]);
+                $rs = saveNote($_GET["id"],$course_id,$fileName);
                 if($rs!==true){
                     $err_db=$rs;
                 }
@@ -30,14 +36,26 @@ $course_id = getCourseIdbyName($_GET['sub']);
 
     }
     elseif(isset($_GET["dfile"])){
-        $file=$_GET["dfile"];
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename='.$file);        
-        file_get_contents($file);
+
+        $file="./uploads/".$_GET["sub"]."_".$_GET["sec"]."/".$_GET["dfile"];
+    
+        if(!file_exists($file)){ // file does not exist
+            $err_db="file does not exist";
+        } else {
+            header("Content-Disposition: attachment; filename=" . $_GET["dfile"]);   
+            $fp = fopen($file, "r");
+            while (!feof($fp))
+            {
+                echo fread($fp, 65536);
+                flush(); // this is essential for large downloads
+            } 
+            fclose($fp); 
+        }
      
     }
     elseif (isset($_GET["delfile"])) {
-        $file="./uploads/".$_GET["delfile"];
+        //echo $_GET["delfile"]." ".$_GET["delfileId"];
+        $file="./uploads/".$_GET["sub"]."_".$_GET["sec"]."/".$_GET["delfile"];
 
         if(file_exists($file)){
             if(!(unlink($file) && deleteNotebyId($_GET["delfileId"]))){
@@ -55,7 +73,7 @@ $course_id = getCourseIdbyName($_GET['sub']);
 
 
     function saveNote($section_id,$course_id,$fileName){
-
+        $fileName = str_replace(" ","_",$fileName);
         $query="insert into notes values(NULL,$section_id,$course_id,'$fileName')";
         return execute($query);
 

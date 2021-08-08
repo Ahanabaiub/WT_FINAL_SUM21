@@ -23,6 +23,7 @@
                 <a href="./createSection.php">Create</a>
                 <a href="./studentEnrollReport.php">Report</a>
             </div>
+           
             <div class="students-section">
                 <h3>All Section</h3>
                 <table>

@@ -37,6 +37,8 @@
 
      if(isset($_POST["add_student"])){
 
+         // echo "add student fired";
+
           if(empty($_POST["cid"])){
                $hasError = true;
                $err_cid  ="College ID Required.";
@@ -214,7 +216,7 @@
      }
 
      function insertStudent($cid,$name,$department,$address,$dob,$year,$blood,$password){
-          $query ="INSERT INTO students VALUES (NULL,$cid,'$name',$department,'$address','$dob',$year,'$blood','$password',NULL)";
+          $query ="INSERT INTO students VALUES (NULL,$cid,'$name',$department,'$address','$dob',$year,'$blood','$password',NULL,NULL)";
           return execute($query);
      }
 
