@@ -3,6 +3,10 @@
     margin: 0px;
     padding: 0px;
 }
+
+body{
+    background: rgb(241, 241, 241);
+}
 a{
     text-decoration: none;
 }
@@ -46,7 +50,6 @@ ul{
 
 .main-container{
     background: rgb(241, 241, 241);
-    height: 100vh;
     width: 100%;
 }
 

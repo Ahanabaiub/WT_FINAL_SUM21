@@ -17,7 +17,7 @@
             <h2>Student Management</h2>
             <div class="students-section">
                 <h3>Student Creation Form</h3>
-                <form action="" method="post" onsubmit="return validate()">
+                <form action="" onsubmit="return validate()" method="post">
         <fieldset>
            
                  <table>
@@ -29,25 +29,25 @@
                     </tr>
                     <tr>
                         <td><b>Name :</b></td>
-                        <td><input type="text" name="name" value="<?php echo $name; ?>"></td>
+                        <td><input type="text" id="name" name="name" value="<?php echo $name; ?>"></td>
                         <td><span id="err_name"> <?php echo $err_name; ?></span></td>
                     </tr>
                     <tr>
                         <td><b>Address:</b></td>
-                        <td><input type="text" name="address" value="<?php echo $address; ?>"></td>
+                        <td><input type="text" id="address" name="address" value="<?php echo $address; ?>"></td>
                         <td><span id="err_address"><?php echo $err_address; ?> </span></td>
                     </tr>
                     <tr>
                         <td><b>Date Of Birth :</b></td>
                         <td>
-                            <input type="text" name="dob" value="<?php echo $dob; ?>" placeholder="dd/mm/yy"><br>
+                            <input type="text" name="dob" id="dob" value="<?php echo $dob; ?>" placeholder="dd/mm/yy"><br>
                         </td>
                         <td><span id="err_dob"><?php echo $err_dob; ?> </span></td>
                     </tr>
                     <tr>
                         <td><b>Department :</b></td>
                         <td>
-                            <select name="department">
+                            <select name="department" id="department">
                                 <option disabled selected>Department</option>
                                 <?php
                                    foreach($departments as $c){
@@ -61,21 +61,21 @@
                     <tr>
                         <td><b>Year :</b></td>
                         <td>
-                            <input type="text" name="year" value="<?php echo $year; ?>"><br>
+                            <input type="text" name="year" id="year" value="<?php echo $year; ?>"><br>
                         </td>
                         <td><span id="err_year"><?php echo $err_year; ?> </span></td>
                     </tr>
                     <tr>
                         <td><b>Blood Group :</b></td>
                         <td>
-                            <input type="text" name="blood" value="<?php echo $blood; ?>"><br>
+                            <input type="text" name="blood" id="blood" value="<?php echo $blood; ?>"><br>
                         </td>
                         <td><span id="err_blood"><?php echo $err_blood; ?> </span></td>
                     </tr>
                     <tr>
                         <td><b>Password:</b></td>
                         <td>
-                            <input type="text" name="password" value="<?php echo $password; ?>"><br>
+                            <input type="text" name="password" id="password" value="<?php echo $password; ?>"><br>
                         </td>
                         <td><span id="err_password"><?php echo $err_password; ?> </span></td>
                     </tr>
@@ -91,6 +91,7 @@
     </div>
 
     <script>
+        //////.....AJAX...........
         function checkIdExistance(tid){
             if(tid.length==0){
                 return;
@@ -106,11 +107,88 @@
             xhr.send();
             
         }
+        function get(id){
+			return document.getElementById(id);
+		}
+
+        
+
+        //////.........Javascript Clint side form validation...............
+        var hasError=false;
 
 
         function validate(){
+           
+            refresh();
+           
+
+                if(get("name").value == ""){
+					hasError = true;
+					get("err_name").innerHTML = "*Name Required.";
+				}
+				else if(get("name").value.length <=3){
+					hasError = true;
+					get("err_name").innerHTML = "*Name must be > 3 char";
+				}
+
+                if(get("cid").value == ""){
+					hasError = true;
+					get("erId").innerHTML = "*College ID Required.";
+				}
+				else if(parseInt(get("cid").value) <1000 || parseInt(get("cid").value)>=2000){
+					hasError = true;
+					get("erId").innerHTML = "*Name must be >= 1000 and <2000";
+				}
+
+                if(get("address").value == ""){
+					hasError = true;
+					get("err_address").innerHTML = "*Address Required.";
+				}
+
+                if(get("dob").value == ""){
+					hasError = true;
+					get("err_dob").innerHTML = "*DOB Required.";
+				}
+
+
+                if(get("department").selectedIndex == 0){
+					hasError = true;
+					get("err_department").innerHTML = "*Department Required.";
+				}
+
+                if(get("year").value == ""){
+					hasError = true;
+					get("err_year").innerHTML = "*Year Required.";
+				}
+
+                if(get("blood").value == ""){
+					hasError = true;
+					get("err_blood").innerHTML = "*Blood Required.";
+				}
+
+                if(get("password").value == ""){
+					hasError = true;
+					get("err_password").innerHTML = "*Password Required.";
+				}
+			
+
+
+
+                return !hasError;     
 
         }
+
+        function refresh(){
+				hasError=false;
+				get("err_name").innerHTML ="";
+				get("erId").innerHTML ="";
+				get("err_address").innerHTML ="";
+				get("err_dob").innerHTML="";
+				get("err_department").innerHTML ="";
+				get("err_year").innerHTML = "";
+                get("err_blood").innerHTML = "";
+                get("err_password").innerHTML = "";
+			}
     </script>
     
 </body>
