@@ -79,17 +79,23 @@ table{
                         <span class="form-strct" >Session :</span><br>
                     </div>
                     <div class="section-form" >
-                        <input type="text" name="name" class="form-strct" value="<?php  ?> "><span><?php  echo $err_name;?></span><br>
+                        <input type="text" name="name" class="form-strct" value="<?php echo $name; ?> "><span class="err-msg"><?php  echo $err_name;?></span><br>
                         <select name="department" class="form-strct" >
                                 <option disabled selected>Department</option>
                                 <?php
                                    foreach($departments as $c){
-                                        echo "<option value='".$c["id"]."'>".$c["d_name"]."</option>";
+                                       if($c["id"]==$department)
+                                       {
+                                        echo "<option selected value='".$c["id"]."'>".$c["d_name"]."</option>";
+                                       }
+                                       else{
+                                        echo "<option  value='".$c["id"]."'>".$c["d_name"]."</option>";
+                                       }
                                     }
                                 ?>
-                        </select><span><?php  echo $err_department;?></span><br>
-                        <input type="text" name="year" class="form-strct" value="<?php   ?> "><span><?php  echo $err_year;?></span><br>
-                        <input type="text" name="session"  class="form-strct" value="<?php ?> "><span><?php  echo $err_session;?></span><br>
+                        </select><span class="err-msg"><?php  echo $err_department;?></span><br>
+                        <input type="text" name="year" class="form-strct" value="<?php echo $year; ?> "><span class="err-msg"><?php  echo $err_year;?></span><br>
+                        <input type="text" name="session"  class="form-strct" value="<?php echo $session;?> "><span class="err-msg"><?php  echo $err_session;?></span><br>
                     </div>
                     <br>
                     <input type="submit" class="btn"  name="add-section" value="Add"> 
@@ -132,7 +138,21 @@ table{
 
 <script>
     function createSection(){
+       
+        document.querySelectorAll(".err-msg").forEach(item=>item.innerHTML="");
+       // document.querySelectorAll(".form-strct").forEach(item=>item.value="");
+        document.querySelectorAll(".form-strct").forEach((item)=>{
+           if(item.tagName==="SELECT"){
+               item[0].selected="selected";
+           }
+           else{
+               item.value="";
+           }
+           
+           });
 
+     
+      
         if(document.getElementById("crt-btn").innerHTML=="Create"){
             document.getElementById("create-section").style.display="block";
             document.getElementById("crt-btn").innerHTML="Close";

@@ -226,6 +226,19 @@
           return $rs[0];
      }
 
+     function getStudentByCid($cid){
+          $query ="SELECT * FROM students where cid = $cid";
+          $rs = get($query);
+          return $rs[0];
+     }
+
+     function getSectionId($cid){
+          $query ="SELECT section_id FROM students where cid = $cid";
+          $rs = get($query);
+          return $rs[0]["section_id"];
+
+     }
+
      function getAllDepartments(){
           $query ="SELECT * FROM departments";
           $rs = get($query);
@@ -236,6 +249,11 @@
           $query = "update students set cid=$cid,name='$name',department_id=$department,address='$address',dob='$dob',year=$year,blood='$blood' where id=$id";
           return execute($query);
           
+     }
+
+     function getCoursesByDeptAndYear($dpt_id,$year){
+          $query = "select * from courses where department_id = $dpt_id and year = $year";
+          return get($query);
      }
 
      function deleteStudent($id){
@@ -256,6 +274,18 @@
           return $rs[0];
      }
 
+     function getCourseTeacher($cId,$secId){
+          $query = "select ct.*,t.name from course_teacher ct left join teachers t on ct.teacher_id=t.id WHERE ct.course_id = $cId and ct.section_id = $secId";
+          $rs=get($query);
+          if($rs){
+              return $rs[0];
+          }
+          else{
+              return array("name"=>"--");
+          }
+      }
+      
+
 
      function generateReport($year,$month){
 
@@ -263,6 +293,29 @@
          $query="select s.*,d.d_name from students s left join departments d on s.department_id = d.id where created like '%$year-$month%'";
           $rs = get($query);
           return $rs;
+
+     }
+
+     function getSection($sid){
+          $query = "select * from sections where id = $sid";
+          $rs = get($query);
+
+          return $rs[0];
+     }
+
+     function getDepartmentName($did){
+          $query = "select d_name from departments where id = $did";
+          $rs = get($query);
+
+          return $rs[0]["d_name"];
+
+     }
+
+     function getSubNameById($id){
+
+          $query ="select name from courses where id =  $id";
+          $rs = get($query);
+          return $rs[0]["name"];
 
      }
 

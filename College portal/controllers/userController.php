@@ -33,16 +33,45 @@
 
             if($cid>=1000 && $cid<2000){
                 //student
+
+                $rs= authenticateStudent($cid,$password);
+
+                if($rs){
+                    // echo getAdminName($cid);
+                    $_SESSION["loggedUser"] = getStudentName($cid);
+                    $_SESSION["cid"]=$cid;
+                    $_SESSION["dashName"]="Student DashBoard";
+                    if(isset($_POST["remember_me"])){
+                      setcookie("userCookie",$cid,time()+60);
+                      setcookie("userPass",$password,time()+60);
+                    }
+                    else{
+                     setcookie("userCookie",$cid,60);
+                     setcookie("userPass",$password,60);
+                    }
+                    header("Location: studentDash.php");
+                }
+                else{
+                 $db_err ="Invalid userId Password.";
+                }
             }
             else if($cid>=2000 && $cid<3000){
                 //admin
             
-               $rs= authenticateUser($cid,$password);
+               $rs= authenticateAdmin($cid,$password);
 
                if($rs){
                    // echo getAdminName($cid);
                    $_SESSION["loggedUser"] = getAdminName($cid);
                    $_SESSION["dashName"]="Admin DashBoard";
+                   if(isset($_POST["remember_me"])){
+                     setcookie("userCookie",$cid,time()+60);
+                     setcookie("userPass",$password,time()+60);
+                   }
+                   else{
+                    setcookie("userCookie",$cid,60);
+                    setcookie("userPass",$password,60);
+                   }
                    header("Location: adminDash.php");
                }
                else{
@@ -67,13 +96,16 @@
                }
 
             }
+            else{
+                $db_err ="Invalid userId Password.";
+            }
 
         }
 
     }
 
 
-    function authenticateUser($cid,$password){
+    function authenticateAdmin($cid,$password){
 		$query = "select * from admin where cid='$cid' and password='$password'";
 		$rs = get($query);
 		if(count($rs)>0){
@@ -90,6 +122,22 @@
         $nm = $rs[0];
         return $nm["name"];
 
+    }
+
+    function  getStudentName($cid){
+        $query = "select * from students where cid = $cid";
+        $rs = get($query);
+        $nm = $rs[0];
+        return $nm["name"];
+    }
+
+    function authenticateStudent($cid,$password){
+        $query = "select * from students where cid='$cid' and password='$password'";
+		$rs = get($query);
+		if(count($rs)>0){
+			return true;
+		}
+		return false;
     }
 
     function authenticateTeacher($cid,$password){
