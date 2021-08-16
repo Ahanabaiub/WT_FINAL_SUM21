@@ -2,6 +2,9 @@
 <?php
     include_once "../../controllers/c/teacherController.php";
     $teachers = getAllTeachers();
+    if(isset($_COOKIE["message"])){
+        echo $_COOKIE["message"];
+    }
 ?>
 
 
