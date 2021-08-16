@@ -112,6 +112,13 @@ ul{
     color: red;
 }
 
+.livesrc{
+    width: 550px;
+    height: 25px;
+    padding: 2px 5px;
+    font-size: 19px;
+}
+
 .login-btn{
     width: 80px;
     padding: 10px 15px;

@@ -41,6 +41,7 @@
                     $_SESSION["loggedUser"] = getStudentName($cid);
                     $_SESSION["cid"]=$cid;
                     $_SESSION["dashName"]="Student DashBoard";
+                     setcookie("studentCookie","Hello Student",time()+70);
                     if(isset($_POST["remember_me"])){
                       setcookie("userCookie",$cid,time()+60);
                       setcookie("userPass",$password,time()+60);

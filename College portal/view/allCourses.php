@@ -37,7 +37,14 @@
             <div class="create-btn">
                 <a href="./coursecreation.php">Create</a>
             </div>
+            <div style="margin: 10px 200px;">
+                <form>
+                    <input type="text" onkeyup="liveSearch(this.value)" name="search" class="livesrc" placeholder="Search.....">
+                </form>
+            </div>
+           
             <div class="students-section">
+               <div id="serchResult"></div>
                <div id="allSub">
                     <h3>All Subjects</h3>
                     <table>
@@ -70,5 +77,29 @@
             </div>
         </div> 
     </div>
+    <script>
+
+        function liveSearch(str){
+
+            if(str.length==0){
+                document.getElementById("serchResult").innerHTML="";
+                 document.getElementById("allSub").style.display="block";
+            }
+            else{
+                document.getElementById("allSub").style.display="none";
+
+                /////.............AJAX...............
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET","utils/courseLiveSearch.php?q="+str,true);
+                xhr.onreadystatechange=function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        document.getElementById("serchResult").innerHTML = this.responseText;
+                    }
+                };
+                xhr.send();
+            }
+
+        }
+    </script>
 </body>
 </html>

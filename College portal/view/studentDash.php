@@ -33,6 +33,12 @@
     <div style=" background-color: #4caf50; padding: 10px 20px; ">
         <h1>Student DashBoard</h1>
     </div>
+    <?php  
+            if(isset($_COOKIE["studentCookie"])){
+                echo $_COOKIE["studentCookie"];
+            }
+    
+    ?>
     <div class="main-container">
        <div class="home"> 
            

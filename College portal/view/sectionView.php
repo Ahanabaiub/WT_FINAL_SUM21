@@ -56,6 +56,7 @@ table{
                                         echo "<tr>";
                                             echo "<td>$i</td>";
                                             echo "<td>".$c["name"]."</td>";
+                                            
                                             $tech = getCourseTeacher($c["id"],$_GET["id"]);
                                             if(is_null($tech["name"])){
                                                 $tech["name"]="--";
