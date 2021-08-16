@@ -96,6 +96,23 @@
                }
 
             }
+            else if($cid>=4000 && $cid<5000){
+                //College
+
+                
+               $rs= authenticateCollege($cid,$password);
+
+               if($rs){
+                   $_SESSION["loggedUser"] = getCollegeName($cid);
+                   $_SESSION["dashName"]="Teacher DashBoard";
+                   $_SESSION["loggedUserId"]=getCollegeId($cid);
+                   header("Location: ../view/college view/dashboard.php");
+               }
+               else{
+                $db_err ="Invalid userId Password.";
+               }
+
+            }
             else{
                 $db_err ="Invalid userId Password.";
             }
@@ -144,6 +161,35 @@
         $query = "select * from teachers where cid='$cid' and password='$password'";
 		$rs = get($query);
 		if(count($rs)>0){
+			return true;
+		}
+		return false;
+
+    }
+    ///////........college..........
+    function getCollegeName($cid){
+
+        $query = "select * from college_user where c_id = $cid";
+        $rs = get($query);
+        $nm = $rs[0];
+        return $nm["name"];
+        
+    }
+
+
+    function getCollegeId($cid){
+        $query = "select * from college_user where c_id = $cid";
+        $rs = get($query);
+        $nm = $rs[0];
+        return $nm["id"];
+    }
+
+    function authenticateCollege($cid,$password){
+
+        $query = "select * from college_user where c_id ";
+        $rs = get($query);
+
+        if(count($rs)>0){
 			return true;
 		}
 		return false;

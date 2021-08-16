@@ -31,7 +31,13 @@
 <body>
     <?php  require_once "headerDash.php"; ?>
     <div class="main-container">
-       <div class="home">   
+       <div class="home"> 
+           
+            <div class="main-menu">
+                <a href="./teacher_feedback.php">Feedback</a>
+                <?php  echo "<a href=uploadNotification.php?secId=".$section_id."&tid=".$tid."&subid=".$course_id.">Notifications</a>"   ?>
+                <a href="./viewNotifications.php?">Notifications</a>
+            </div>
          
        
         <div class="students-section">

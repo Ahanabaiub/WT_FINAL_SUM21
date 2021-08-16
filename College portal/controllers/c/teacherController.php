@@ -1,23 +1,17 @@
+<?php include "header.php"; ?>
 <?php
-     require_once "../models/db_config.php";
-
-     $cid = "";
-     $err_cid = "";
-
-     $id = "";
-     $name = "";
-     $err_name="";
-
-     $address = "";
-     $err_address = "";
-
-     $password = "";
-     $err_password  ="";
-
-     $err_db="";
-
-     $departments = getAllDepartments();
-     $department = "";
+     include_once "../../models/db_config.php" ;
+ $cid = "";
+ $err_cid = "";
+ $id = "";
+ $name = "";
+ $err_name="";
+ $address = "";
+ $err_address = "";
+ $password = "";
+ $err_password  ="";
+ $departments = getAllDepartments();
+ $department = "";
      $err_department = "";
 
      $enroll_year = "";
@@ -25,6 +19,7 @@
      $err_report = "";
 
      $hasError = false;
+	 $err_db="";
 
      if(isset($_POST["add_teacher"])){
 
@@ -131,7 +126,7 @@
           $rs= deleteTeacher($_GET['del']);
 
           if($rs === true){
-               header("Location: ./allTeachers.php");
+               header("Location:allTeachers.php");
           }
           $err_db = $rs;
       }
@@ -169,8 +164,6 @@
           return $rs[0];
      }
 
-    
-
      function getAllDepartments(){
           $query ="SELECT * FROM departments";
           $rs = get($query);
@@ -189,24 +182,5 @@
           return execute($query);
 
      }
-
-     function generateReport($year,$month){
-
-         // $query ="select * from students where created like '%$year-$month%'";
-         $query="select s.*,d.d_name from students s left join departments d on s.department_id = d.id where created like '%$year-$month%'";
-          $rs = get($query);
-          return $rs;
-
-     }
-
-     function getAllAssignedSection($id){
-
-          $query = "SELECT ct.*, s.name section_name,c.name course_name from course_teacher ct 
-          left join sections s on ct.section_id = s.id
-          left join courses c on ct.course_id =c.id 
-           where teacher_id =$id";
-          $rs = get($query);
-          return $rs;
-
-     }
 ?>
+<?php include "footer.php"; ?>

@@ -65,7 +65,7 @@ table{
                                                 echo "<td><a href='assignTeacher.php?dept=".$_GET['dept']."&sec=".$_GET['sec']."&year=".$year."&id=".$_GET["id"]."&cid=".$c["id"]."'>Add</a></td>";
                                             }
                                             else{
-                                                echo "<td><a href='assignTeacher.php?dept=".$_GET['dept']."&sec=".$_GET['sec']."&year=".$year."&id=".$_GET["id"]."&cid=".$c["id"]."'>Change</a></td>";
+                                                echo "<td><a href='assignTeacher.php?dept=".$_GET['dept']."&sec=".$_GET['sec']."&year=".$year."&id=".$_GET["id"]."&cid=".$c["id"]."&tid=".$tech["teacher_id"]."'>Change</a></td>";
                                             }
                                         echo "</tr>"; 
                                         $i++;

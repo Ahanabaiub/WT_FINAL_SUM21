@@ -37,9 +37,13 @@
                                         <select name="id">
                                             <option disabled selected>Teacher</option>
                                             <?php
+                                            $tid=$_GET["tid"];
                                             foreach($teachers as $c){
-                                                
-                                                echo "<option value='".$c["id"]."'>".$c["name"]."</option>";
+                                               
+                                                if($c["id"] != $tid){
+                                                    echo "<option value='".$c["id"]."'>".$c["name"]."</option>";
+                                                }
+                                               
                                             }
                                             ?>
                                         </select>

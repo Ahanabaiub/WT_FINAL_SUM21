@@ -1,6 +1,7 @@
 <?php
 
 $err_note = "";
+$err_assignment="";
 $err_db ="";
 $course_id = getCourseIdbyName($_GET['sub']);
 

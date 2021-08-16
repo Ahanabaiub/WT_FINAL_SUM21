@@ -3,6 +3,7 @@
     require_once "./checkAuthorization.php";
     require_once "../controllers/studentController.php";
     require_once "../controllers/notesController.php";
+    require_once "../controllers/notificationController.php";
 
     $t_cid = $_SESSION["loggedUserId"];
    // echo "teacher Id: ".$t_cid;
@@ -11,6 +12,10 @@
     $sec=$_GET["sec"];
     $students=getAllStudentsBySectionId($section_id);
     $notes = getAllNotes($section_id,$course_id);
+    $course_id = getCourseIdbyName($_GET["sub"]);
+    $tid = $t_cid;
+
+    
 
   // echo '<td><a href="sectionDetails.php?id='.$section_id.'&sec='.$sec.'&sub='.$sub.'&dfile='.$c['file_name']."'>".$c['file_name']."</a></td>";
 
@@ -43,6 +48,10 @@
             <br>
             <span><?php echo $err_db ?></span>
             <div>
+            
+                <?php  echo "<a href=uploadNotification.php?secId=".$section_id."&tid=".$tid."&subid=".$course_id.">Notification</a>"   ?>
+            </div>
+            <div>
                 <h3>Notes:</h3>
                 <form action="" method="post" enctype="multipart/form-data">
                     <span>Upload Note(pdf)</span><input type="file" name="n_name"><span><?php echo $err_note  ?></span><br>
@@ -72,6 +81,12 @@
                 </table>
                 
                 </div>
+            </div>
+            <div>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <span>Upload Assignment(pdf)</span><input type="file" name="assignment_name"><span><?php echo $err_assignment ?></span><br>
+                    <input type="submit" name="add_assignment" value="Upload">
+                </form>
             </div>
             <h3>All Students</h3>
                 <table>

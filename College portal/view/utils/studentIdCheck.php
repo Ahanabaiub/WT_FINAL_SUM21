@@ -7,7 +7,7 @@
         $rs = checkStudentId($_GET["id"]);
 
         if($rs>0){
-            echo "Id Already Exist.";
+            echo "Student Id Already Exist.";
         }
         else{
             echo "";
