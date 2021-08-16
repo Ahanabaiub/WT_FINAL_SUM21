@@ -69,6 +69,7 @@
 		
 		
 		if(!$hasError){
+			header("location: studentDash.php");
 			echo "<h1>Form submitted</h1>";
 			echo $_POST["teachername"]."<br>";
 			echo $_POST["prepared"]."<br>";

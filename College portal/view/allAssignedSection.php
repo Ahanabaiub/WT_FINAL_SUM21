@@ -29,10 +29,16 @@
        
     </style>
 </head>
-<body>
-    <?php  require_once "headerDash.php"; ?>
-    <div class="main-container">
-      <?php require_once "./teacherNav.php"?>
+<body  style="background-color: #e0f2f1;">
+    <div style=" background-color: #2962ff; padding: 10px 20px; ">
+        <h1>Teacher DashBoard</h1>
+    </div>
+    <div >
+      <?php require_once "./teacherNav.php";
+            if(isset($_COOKIE["noticeCookie"])){
+                echo $_COOKIE["noticeCookie"];
+            }
+      ?>
         <div class="students-section">
                 <h3>All Section</h3>
                 <table>

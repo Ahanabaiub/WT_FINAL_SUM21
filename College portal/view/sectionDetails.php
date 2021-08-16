@@ -33,17 +33,19 @@
        }
        table{
            border-collapse: collapse;
-           width: 97%;
+           width: 95%;
            margin: 5px 10px;
        }
        
     </style>
 </head>
 <body>
-    <?php  require_once "headerDash.php"; ?>
+    <div style=" background-color: #2962ff; padding: 10px 20px; ">
+        <h1>Teacher DashBoard</h1>
+    </div>
     <div class="main-container">
       <?php require_once "./teacherNav.php"?>
-        <div class="students-section">
+        <div>
             <h2>Section Details [Section: <?php echo $_GET['sec']." -- Subject: ".$_GET['sub']?>]</h2>
             <br>
             <span><?php echo $err_db ?></span>

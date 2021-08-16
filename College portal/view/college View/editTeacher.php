@@ -3,6 +3,9 @@
     include_once "../../controllers/c/teacherController.php";
     $teacher = getTeacher($_GET["id"]);
     $department = getAllDEpartments();
+    if(isset($_COOKIE["message"])){
+        echo $_COOKIE["message"];
+    }
 ?>
 
 

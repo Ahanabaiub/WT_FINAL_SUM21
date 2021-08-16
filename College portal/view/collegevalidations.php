@@ -5,8 +5,8 @@
 	$last_name="";
 	$err_last_name="";
 	
-	$teacherid="";
-	$err_teacherid="";
+	$cid="";
+	$err_cid="";
 	
 	$password = "";
     $err_password = "";
@@ -53,16 +53,16 @@
 		}
 		
 		
-		if(empty($_POST["teacherid"])){
+		if(empty($_POST["cid"])){
 			$hasError = true;
-			$err_teacherid=" Id Required";
+			$err_cid="College Id Required";
 		}
-		else if(strlen($_POST["teacherid"]) <= 6){
+		else if(strlen($_POST["cid"]) <= 6){
 			$hasError = true;
-			$err_teacherid=" Id must contain >8 character";
+			$err_cid=" College Id must contain >8 character";
 		}
 		else{
-			$teacherid = $_POST["teacherid"];
+			$cid = $_POST["cid"];
 		}
 		
 		
@@ -105,11 +105,11 @@
 		
 		
 		if(!$hasError){
-			header("location: teacherDash.php");
+			header("location: adminDash.php");
 			echo "<h1>Form submitted</h1>";
 			echo $_POST["first_name"]."<br>";
 			echo $_POST["last_name"]."<br>";
-			echo $_POST["teacherid"]."<br>";
+			echo $_POST["cid"]."<br>";
 			echo $_POST["password"]."<br>";
 			echo $_POST["department"]."<br>";
 			echo $_POST["phonenumber"]."<br>";

@@ -4,6 +4,9 @@
     $course = getCourse($_GET["id"]);
     
     $department = getAllDEpartments();
+    if(isset($_COOKIE["message"])){
+        echo $_COOKIE["message"];
+    }
 ?>
 
 <html>

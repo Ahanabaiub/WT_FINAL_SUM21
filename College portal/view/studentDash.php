@@ -26,17 +26,23 @@
            margin: 5px 10px;
        }
        
-           </style>
+        </style>
 </head>
 <body>
-    <?php  require_once "headerDash.php"; ?>
+    <!-- <?php  require_once "headerDash.php"; ?> -->
+    <div style=" background-color: #4caf50; padding: 10px 20px; ">
+        <h1>Student DashBoard</h1>
+    </div>
     <div class="main-container">
        <div class="home"> 
            
             <div class="main-menu">
                 <a href="./teacher_feedback.php">Feedback</a>
-                <?php  echo "<a href=uploadNotification.php?secId=".$section_id."&tid=".$tid."&subid=".$course_id.">Notifications</a>"   ?>
-                <a href="./viewNotifications.php?">Notifications</a>
+
+                <?php  echo "<a href=./viewNotifications.php?secId=".$student["section_id"].">Notifications</a>"   ?>
+                <?php  echo "<a href=./student_update.php>My Info</a>"   ?>
+                <?php  echo "<a href=./logout.php>Logout</a>"   ?>
+        
             </div>
          
        

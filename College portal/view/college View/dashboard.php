@@ -1,8 +1,7 @@
 <?php 
 
-    include "header.php";
-
-
+    include_once "header.php";
+  
 
 
 ?>
@@ -11,6 +10,11 @@
 	
 </header>
 <body>
+    <?php
+         if(isset($_COOKIE["message"])){
+            echo $_COOKIE["message"];
+        }
+    ?>
 <ul>
 <li> <a href="allCourses.php";>SEE ALL COURSE </a></li>
 <li> <a href="CourseCreation.php";>CREATE COURSE </a></li>

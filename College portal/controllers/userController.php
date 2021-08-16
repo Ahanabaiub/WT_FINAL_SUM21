@@ -106,6 +106,8 @@
                    $_SESSION["loggedUser"] = getCollegeName($cid);
                    $_SESSION["dashName"]="Teacher DashBoard";
                    $_SESSION["loggedUserId"]=getCollegeId($cid);
+                   ////college cookie...........
+                   setcookie("message","Hello Cookie",time()+80);
                    header("Location: ../view/college view/dashboard.php");
                }
                else{

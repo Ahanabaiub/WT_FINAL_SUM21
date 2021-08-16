@@ -1,4 +1,4 @@
-<?php include "header.php"; ?>
+<?php include_once "header.php"; ?>
 <?php
      include_once "../../models/db_config.php" ;
  $cid = "";

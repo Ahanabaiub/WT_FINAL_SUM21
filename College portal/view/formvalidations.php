@@ -1,27 +1,19 @@
 <?php
 	$first_name="";
-	$err_first_name="";
-	
+	$err_first_name="";	
 	$last_name="";
 	$err_last_name="";
-	
-	$teacherid="";
-	$err_teacherid="";
-	
+	$studentid="";
+	$err_studentid="";	
 	$password = "";
-    $err_password = "";
-	
+    $err_password = "";	
 	$department="";
-	$err_department="";
-	
-	
-   $phonenumber = "";
+	$err_department="";	
+    $phonenumber = "";
     $err_phonenumber= "";
-	
 	$address = "";
     $err_address = "";
-	
-	
+
 	$hasError=false;
 	
 	$array= array("Science","Busienss","Administration","Arts");
@@ -53,16 +45,16 @@
 		}
 		
 		
-		if(empty($_POST["teacherid"])){
+		if(empty($_POST["studentid"])){
 			$hasError = true;
-			$err_teacherid=" Id Required";
+			$err_studentid=" Id Required";
 		}
-		else if(strlen($_POST["teacherid"]) <= 6){
+		else if(strlen($_POST["studentid"]) <= 6){
 			$hasError = true;
-			$err_teacherid=" Id must contain >8 character";
+			$err_studentid=" Id must contain >8 character";
 		}
 		else{
-			$teacherid = $_POST["teacherid"];
+			$studentid = $_POST["studentid"];
 		}
 		
 		
@@ -102,14 +94,12 @@
 		}
 		
 		
-		
-		
 		if(!$hasError){
-			header("location: teacherDash.php");
+			header("location: studentDash.php");
 			echo "<h1>Form submitted</h1>";
 			echo $_POST["first_name"]."<br>";
 			echo $_POST["last_name"]."<br>";
-			echo $_POST["teacherid"]."<br>";
+			echo $_POST["studentid"]."<br>";
 			echo $_POST["password"]."<br>";
 			echo $_POST["department"]."<br>";
 			echo $_POST["phonenumber"]."<br>";

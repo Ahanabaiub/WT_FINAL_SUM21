@@ -15,6 +15,7 @@
     $tid=$_GET["tid"];
 
     if(isset($_POST["message"])){
+        setcookie("noticeCookie","Notice Uploaded",time()+70);
         $message=$_POST["message"];
          addNotification($secId,$subId,$tid,$message);
          header("location: allAssignedSection.php");
@@ -31,6 +32,20 @@
  function addNotification($secId,$subId,$tid,$message){
      $query="insert into notifications values(NULL,$secId,$subId,'$message',$tid,NULL)";
      return execute($query);
+ }
+
+
+ function getAllNotifications($secId){
+     $query = " select * from notifications where section_id = $secId";
+
+     return get($query);
+ }
+
+ function getTeacherName($tid){
+
+    $query = "select name from teachers where id  = $tid";
+   $rs = get($query);
+    return $rs[0]["name"];
  }
 
 ?>

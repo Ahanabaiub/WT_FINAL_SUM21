@@ -1,7 +1,13 @@
 <?php include "header.php"; ?>
 <?php
+    
     include_once "../../controllers/c/CourseController.php";
     $courses = getAllcourse();
+    
+    if(isset($_COOKIE["message"])){
+        echo $_COOKIE["message"];
+    }
+    
 ?>
 
 
@@ -28,6 +34,7 @@
                                         echo "<td>".$c["name"]."</td>";
                                         echo "<td>".$c["d_name"]."</td>";
                                         echo "<td>".$c["year"]."</td>";
+                                        
                                         echo '<td><a id="editBtn" href="editCourse.php?id='.$c['id'].'">Edit</a>'; echo '<a href="allCourses.php?del='.$c['id'].'">Delete</a></td>';
                                     echo "</tr>";
                                     $i++;

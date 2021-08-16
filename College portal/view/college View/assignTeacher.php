@@ -2,6 +2,9 @@
 <?php
     include_once "../../controllers/c/courseTeacher.php";
     $teachers = getTeachersByDepartment($_GET['dept']);
+    if(isset($_COOKIE["message"])){
+        echo $_COOKIE["message"];
+    }
     
 ?>
 

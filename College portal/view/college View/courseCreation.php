@@ -1,6 +1,9 @@
-<?php include "header.php"; ?>
+<?php include_once "header.php"; ?>
 <?php
    include_once "../../controllers/c/CourseController.php";
+   if(isset($_COOKIE["message"])){
+    echo $_COOKIE["message"];
+}
 ?>
 
 

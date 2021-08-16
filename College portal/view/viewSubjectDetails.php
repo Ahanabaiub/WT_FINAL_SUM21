@@ -30,7 +30,10 @@
            </style>
 </head>
 <body>
-    <?php  require_once "headerDash.php"; ?>
+    <!-- <?php  require_once "headerDash.php"; ?> -->
+    <div style=" background-color: #4caf50; padding: 10px 20px; ">
+        <h1>Student DashBoard</h1>
+    </div>
     <div class="main-container">
                 <div class="main-menu">
                    <a href="./studentDash.php">Home</a>
